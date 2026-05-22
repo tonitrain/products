@@ -75,9 +75,10 @@ namespace hipnuc_driver
 				RCLCPP_INFO(this->get_logger(), "euler_switch: %d\r\n", euler_switch);
 				RCLCPP_INFO(this->get_logger(), "magnetic_switch: %d\r\n", magnetic_switch);
 				
-				imu_pub = this->create_publisher<sensor_msgs::msg::Imu>(imu_topic, rclcpp::SensorDataQoS());
-				euler_pub = this->create_publisher<geometry_msgs::msg::Vector3Stamped>(euler_topic, rclcpp::SensorDataQoS());
-				magnetic_pub = this->create_publisher<sensor_msgs::msg::MagneticField>(magnetic_topic, rclcpp::SensorDataQoS());
+				rclcpp::QoS pub_qos = rclcpp::QoS(rclcpp::KeepLast(10)).reliable().durability_volatile();
+				imu_pub = this->create_publisher<sensor_msgs::msg::Imu>(imu_topic, pub_qos);
+				euler_pub = this->create_publisher<geometry_msgs::msg::Vector3Stamped>(euler_topic, pub_qos);
+				magnetic_pub = this->create_publisher<sensor_msgs::msg::MagneticField>(magnetic_topic, pub_qos);
 				
 				fd = open_ttyport(serial_port, baud_rate);
 

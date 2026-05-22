@@ -9,7 +9,7 @@ def generate_launch_description():
         get_package_share_directory('hipnuc_imu'),
         'config',
         'hipnuc_config.yaml',
-    ),
+    )
 
     return LaunchDescription([
          Node(
