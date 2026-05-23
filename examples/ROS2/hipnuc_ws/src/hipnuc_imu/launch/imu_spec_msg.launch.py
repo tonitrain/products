@@ -24,5 +24,12 @@ def generate_launch_description():
             executable='listener',
             output='screen'
             ),
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            name='imu_link_tf',
+            arguments=['0', '0', '0', '0', '0', '0', 'world', 'imu_link'],
+            output='screen',
+            ),
         ])
 
